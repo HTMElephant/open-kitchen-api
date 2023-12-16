@@ -14,7 +14,7 @@ router.post("/", async (req, res, next) => {
       throw new Error("you should provide a password");
     }
 
-    const [user] = await db.get_users_by_credentials({ email, password });
+    const [user] = await db.get_user_by_credentials({ email, password });
 
     if (!user) {
       throw new Error("no user by found");
