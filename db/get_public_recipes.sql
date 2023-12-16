@@ -1,0 +1,1 @@
+SELECT * FROM recipes WHERE is_private IS NULL or is_private != TRUE LIMIT 10 OFFSET 0
