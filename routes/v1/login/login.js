@@ -17,7 +17,7 @@ router.post("/", async (req, res, next) => {
     const [user] = await db.get_user_by_credentials({ email, password });
 
     if (!user) {
-      throw new Error("no user by found");
+      throw new Error("no user found");
     }
 
     res.json(user);
