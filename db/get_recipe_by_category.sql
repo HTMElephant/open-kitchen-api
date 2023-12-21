@@ -1,1 +1,1 @@
-SELECT * FROM recipes WHERE is_private IS NULL or is_private != TRUE AND category_id IS NOT NULL LIMIT 10 OFFSET ${page};
+SELECT * FROM recipes WHERE is_private IS NULL or is_private != TRUE AND category_id = ${category_id} LIMIT 10 OFFSET ${page};
