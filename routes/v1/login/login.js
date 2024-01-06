@@ -19,7 +19,7 @@ router.post("/", async (req, res, next) => {
       throw new Error("you should provide a password");
     }
     
-    const [user] = await db.get_user_by_credentials({ email, password });
+    const [user] = await db.get_user_by_credentials({ email });
     
     if (!user) {
       throw new Error("no user found");
@@ -33,7 +33,7 @@ router.post("/", async (req, res, next) => {
 
     const { TOKEN_SECRET } = process.env
 
-    const token = jwt.sign({id: user.id, email}, TOKEN_SECRET, {expiresIn: "1 day"})
+    const token = jwt.sign({id: user.id, email, first_name, last_name, username}, TOKEN_SECRET, {expiresIn: "1 day"})
 
     res.json({user: {id: user.id, email, first_name: user.first_name, last_name: user.last_name, username: user.username }, token});
   } catch (err) {
