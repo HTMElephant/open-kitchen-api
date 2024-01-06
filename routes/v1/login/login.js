@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const { hashSync, compareSync } = require("bcryptjs");
+const { compareSync } = require("bcryptjs");
 require('dotenv').config()
 
 
