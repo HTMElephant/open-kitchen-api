@@ -64,7 +64,6 @@ router.put("/:id", async (req, res, next) => {
     const { id } = req.params;
 
     const filteredBody = _.omit(req.body, ["id", "user_id", "original_recipe_id", "created_at", "updated_at", "deleted_at"]);
-    console.log(filteredBody)
 
     const recipe = await db.recipes.update({id}, filteredBody );
 
