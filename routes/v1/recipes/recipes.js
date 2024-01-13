@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const _ = require("lodash");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -57,12 +58,28 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/:id", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+
+    const filteredBody = _.omit(req.body, ["id", "user_id", "original_recipe_id", "created_at", "updated_at", "deleted_at"]);
+    console.log(filteredBody)
+
+    const recipe = await db.recipes.update({id}, filteredBody );
+
+    res.json({ recipe });
+  } catch (err) {
+    next(err)
+  }
+});
+
 router.get("/:id", async (req, res, next) => {
   try {
     const db = req.app.get("db");
     const { id } = req.params;
 
-    const [recipe] = await db.get_recipe_by_id({id});
+    const [recipe] = await db.get_recipe_by_id({ id });
     if (!recipe) {
       throw new Error("no recipe found");
     }
@@ -70,6 +87,6 @@ router.get("/:id", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-  });
+});
 
 module.exports = router;
