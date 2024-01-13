@@ -34,8 +34,6 @@ router.post("/", async (req, res, next) => {
       category_id,
     } = req.body;
 
-    console.log(typeof ingredients);
-
     const recipe = await db.recipes.insert({
       title,
       user_id,
