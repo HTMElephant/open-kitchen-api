@@ -19,6 +19,44 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.post("/", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+
+    const {
+      title,
+      user_id,
+      ingredients,
+      directions,
+      description,
+      image_url,
+      is_private,
+      category_id,
+    } = req.body;
+
+    const recipe = await db.recipes.insert({
+      title,
+      user_id,
+      ingredients: {
+        data: ingredients,
+        rawType: true,
+        toPostgres: (p) => {
+          return db.pgp.as.format("$1::jsonb", [JSON.stringify(p.data)]);
+        },
+      },
+      directions,
+      description,
+      image_url,
+      is_private,
+      category_id,
+    });
+
+    res.json({ recipe });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get("/:id", async (req, res, next) => {
   try {
     const db = req.app.get("db");
