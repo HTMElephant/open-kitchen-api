@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const _ = require("lodash");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -39,5 +40,20 @@ router.post("/", async (req, res, next) => {
     next(err);
   }
 });
+
+router.put("/:id", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+
+    const filteredBody = _.omit(req.body, ["id", "created_at", "updated_at", "deleted_at"]);
+
+    const currentKitchen = await db.kitchen.update({id}, filteredBody);
+
+    res.json({ currentKitchen })
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;
