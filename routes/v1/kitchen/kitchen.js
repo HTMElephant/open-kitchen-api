@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
+router.get("/:id/recipes", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const recipes = await db.get_all_recipes_by_kitchen_id({ id });
+    res.json({ recipes });
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const db = req.app.get("db");
