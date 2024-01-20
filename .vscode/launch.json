@@ -6,7 +6,7 @@
             "request": "launch",
             "name": "Nodemon",
             "runtimeExecutable": "nodemon",
-            "program": "${workspaceFolder}/app.js", // replace with your entry point file
+            "program": "${workspaceFolder}/app.js",
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
