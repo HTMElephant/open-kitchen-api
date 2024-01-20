@@ -15,6 +15,7 @@ router.get("/", async (req, res, next) => {
     }
 
     res.json(recipes);
+    
   } catch (err) {
     next(err);
   }

@@ -10,4 +10,4 @@ FROM
     recipes r
     JOIN users u ON u.id = r.user_id
 WHERE
-    r.id = 1;
+    r.id = ${id};
