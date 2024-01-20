@@ -17,6 +17,7 @@ router.post("/", async (req, res, next) => {
 
     const matchedUsers = await db.get_users_by_emails([userEmails]);
 
+    // iterate over the DB user records to match them with the new kitchen's user records
     matchedUsers.forEach((matchedUser) => {
       const result = kitchenUsers.findIndex((kitchenUser) => {
         return kitchenUser.email === matchedUser.email;
