@@ -6,7 +6,7 @@ router.get("/:id/kitchens", async (req, res, next) => {
     const db = req.app.get("db");
     const { id } = req.params;
 
-    const kitchens = await db.get_kitchens_by_id({ id });
+    const kitchens = await db.get_users_kitchens({ id });
 
     res.json(kitchens);
   } catch (err) {
