@@ -12,6 +12,18 @@ router.get("/:id/recipes", async (req, res, next) => {
     next(err);
   }
 });
+router.get("/:id/users", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const response = await db.get_all_users_by_kitchen_id({ id });
+    console.log('response from db', response)
+    const users = response.data
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
 router.get("/:id", async (req, res, next) => {
   try {
     const db = req.app.get("db");
