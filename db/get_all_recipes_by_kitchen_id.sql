@@ -1,4 +1,4 @@
 SELECT r.*
-FROM kitchen_recipes kr 
-JOIN recipes r on r.id = kr.recipe_id
+FROM recipes r 
+JOIN kitchen_recipes kr on kr.recipe_id = r.id
 WHERE kr.kitchen_id = ${id};
