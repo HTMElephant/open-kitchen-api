@@ -12,6 +12,16 @@ router.get("/:id/recipes", async (req, res, next) => {
     next(err);
   }
 });
+router.get("/:id", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const kitchen = await db.get_kitchen_by_id({ id });
+    res.json(kitchen);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.post("/", async (req, res, next) => {
   try {
