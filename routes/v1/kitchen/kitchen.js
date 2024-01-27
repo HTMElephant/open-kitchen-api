@@ -2,6 +2,38 @@ const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
 
+router.get("/:id/recipes", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const recipes = await db.get_all_recipes_by_kitchen_id({ id });
+    res.json({ recipes });
+  } catch (err) {
+    next(err);
+  }
+});
+router.get("/:id/users", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const response = await db.get_all_users_by_kitchen_id({ id });
+    const users = response
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+router.get("/:id", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+    const kitchen = await db.get_kitchen_by_id({ id });
+    res.json(kitchen);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const db = req.app.get("db");
