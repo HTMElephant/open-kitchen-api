@@ -17,8 +17,7 @@ router.get("/:id/users", async (req, res, next) => {
     const db = req.app.get("db");
     const { id } = req.params;
     const response = await db.get_all_users_by_kitchen_id({ id });
-    console.log('response from db', response)
-    const users = response.data
+    const users = response
     res.json(users);
   } catch (err) {
     next(err);
