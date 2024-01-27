@@ -18,4 +18,17 @@ router.get("/:id/kitchens", authenticateToken, async (req, res, next) => {
   }
 });
 
+router.get("/:id/recipes", async (req, res, next) => {
+  try {
+    const db = req.app.get("db");
+    const { id } = req.params;
+
+    const usersRecipes = await db.get_users_recipes({ id });
+    console.log("Users Recipes", usersRecipes);
+    res.json(usersRecipes);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;
