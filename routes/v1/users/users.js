@@ -52,7 +52,9 @@ router.post("/:userId/recipes/:recipeId/favorites", async (req, res, next) => {
         recipe_id: recipeId,
       });
       res.json(newFavorite);
-    } catch (err) {
+    }
+  } catch (err) {
     next(err);
   }
+});
 module.exports = router;
