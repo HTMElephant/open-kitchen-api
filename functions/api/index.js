@@ -34,7 +34,11 @@ app.use(async (err, req, res, next) => {
   });
 });
 
-massive(CONNECTION_STRING).then((connection) => {
+massive(CONNECTION_STRING, {
+  scripts: __dirname + "/db",
+}).then((connection) => {
   app.set("db", connection);
-  app.listen(4001, () => console.log("Express app started on port 4001"));
+  // app.listen(4001, () => console.log("Express app started on port 4001"));
 });
+
+module.exports = app;
