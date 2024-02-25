@@ -20,7 +20,10 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.get("/health-check", (req, res) => res.send("Healthy"));
+app.get("/health-check", (req, res) => {
+  db = req.app.get("db");
+  res.send(`Healthy - db: ${db ? "connected" : "disconnected"}`)
+});
 
 app.use(async (err, req, res, next) => {
   console.log("ERROR HANDLER", req.url);
@@ -35,10 +38,9 @@ app.use(async (err, req, res, next) => {
 });
 
 massive(CONNECTION_STRING, {
-  scripts: __dirname + "/db",
+  scripts: `${__dirname}/db`,
 }).then((connection) => {
   app.set("db", connection);
-  // app.listen(4001, () => console.log("Express app started on port 4001"));
 });
 
 module.exports = app;

@@ -10,9 +10,6 @@
             "restart": true,
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "env": {
-                "PORT": "4001"
-            }
         }
     ]
 }
